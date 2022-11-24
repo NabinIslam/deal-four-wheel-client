@@ -1,13 +1,15 @@
-import AdvertisedCars from '../components/AdvertisedCars';
+import AvailableCars from '../components/AvailableCars';
 import Banner from '../components/Banner';
 import CategoriesSection from '../components/CategoriesSection';
+import FeaturesSection from '../components/FeaturesSection';
 
 const Home = () => {
   return (
     <div>
       <Banner />
-      <AdvertisedCars />
+      <FeaturesSection />
       <CategoriesSection />
+      <AvailableCars />
     </div>
   );
 };

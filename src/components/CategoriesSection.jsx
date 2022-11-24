@@ -14,10 +14,10 @@ const CategoriesSection = () => {
   }, []);
 
   return (
-    <div className="py-7">
+    <div className="py-7 bg-[#f5f5f5] m-0">
       <div className="container mx-auto">
         <h1 className="text-center text-4xl font-bold">Categories</h1>
-        <p className="text-center font-normal text-lg my-3">
+        <p className="text-center font-normal text-lg m-0">
           Find you desire used car by categories
         </p>
         <div className="grid grid-cols-3 py-7 gap-10">
