@@ -12,7 +12,7 @@ const Header = () => {
           </Link>
           <Navbar.Toggle />
           <Navbar.Collapse>
-            <Link to="/" active={true}>
+            <Link to="/" >
               Home
             </Link>
             <Link to="/">About</Link>
