@@ -14,7 +14,7 @@ const CategoriesSection = () => {
   }, []);
 
   return (
-    <div>
+    <div className="py-7">
       <div className="container mx-auto">
         <h1 className="text-center text-4xl font-bold">Categories</h1>
         <p className="text-center font-normal text-lg my-3">
