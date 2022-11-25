@@ -8,6 +8,7 @@ import { AuthContext } from '../contexts/AuthProvider';
 const Register = () => {
   const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
   const [createdUserEmail, setCreatedUserEmail] = useState('');
+  const [token] = useToken(createdUserEmail);
 
   const {
     register,
@@ -18,6 +19,12 @@ const Register = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || '/';
+
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   const handleRegister = data => {
     createUser(data.email, data.password)
