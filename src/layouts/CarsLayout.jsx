@@ -21,6 +21,7 @@ const CarsLayout = () => {
       <div className="basis-1/5 h-screen p-4">
         <div className="w-fit">
           <Sidebar aria-label="Default sidebar example">
+            <h2 className="font-bold text-2xl mb-3">Categories</h2>
             <Sidebar.Items>
               <Sidebar.ItemGroup>
                 {categories.map(category => (
