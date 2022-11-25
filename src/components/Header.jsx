@@ -1,8 +1,22 @@
 import { Navbar } from 'flowbite-react';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthProvider';
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        navigate('/login');
+        toast.success('Logout successful');
+      })
+      .catch(err => console.error(err));
+  };
+
   return (
     <div className="shadow">
       <div className="container mx-auto">
@@ -12,18 +26,43 @@ const Header = () => {
           </Link>
           <Navbar.Toggle />
           <Navbar.Collapse>
-            <Link className="font-bold" to="/">
+            <Link className="font-bold py-1 m-0" to="/">
               Home
             </Link>
-            <Link className="font-bold" to="/cars">
+            <Link className="font-bold py-1 m-0" to="/cars">
               Cars
             </Link>
-            <Link className="font-bold" to="/login">
-              Login
-            </Link>
-            <Link className="font-bold" to="/register">
-              Register
-            </Link>
+            {user ? (
+              <>
+                {' '}
+                <Link className="font-bold py-1" to="/dashboard">
+                  Dashboard
+                </Link>
+                <Link
+                  onClick={handleLogout}
+                  className="font-bold bg-slate-800 text-white px-2 py-1 rounded-md"
+                  to="/login"
+                >
+                  Logout
+                </Link>
+              </>
+            ) : (
+              <>
+                {' '}
+                <Link
+                  className="font-bold bg-slate-800 text-white px-2 py-1 rounded-md"
+                  to="/login"
+                >
+                  Login
+                </Link>
+                <Link
+                  className="font-bold bg-slate-800 text-white px-2 py-1 rounded-md"
+                  to="/register"
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </Navbar.Collapse>
         </Navbar>
       </div>

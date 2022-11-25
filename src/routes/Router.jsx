@@ -7,6 +7,7 @@ import ErrorPage from '../pages/ErrorPage';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import PrivateRoute from './PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,11 @@ const router = createBrowserRouter([
           },
           {
             path: '/cars/category/:name',
-            element: <CategoryCars />,
+            element: (
+              <PrivateRoute>
+                <CategoryCars />
+              </PrivateRoute>
+            ),
           },
         ],
       },

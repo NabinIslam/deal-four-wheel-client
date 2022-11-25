@@ -49,6 +49,17 @@ const Register = () => {
       .catch(err => console.error(err));
   };
 
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then(result => {
+        const user = result.user;
+        saveUser(user.displayName, user.email, 'buyer');
+        navigate(from, { replace: true });
+        toast.success('Login successful');
+      })
+      .catch(err => console.error(err));
+  };
+
   const saveUser = (name, email, role) => {
     const user = { name, email, role };
     fetch('http://localhost:5000/users', {
@@ -62,17 +73,6 @@ const Register = () => {
       .then(data => {
         setCreatedUserEmail(email);
       });
-  };
-
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then(result => {
-        const user = result.user;
-        saveUser(user.displayName, user.email, 'buyer');
-        navigate(from, { replace: true });
-        toast.success('Login successful');
-      })
-      .catch(err => console.error(err));
   };
 
   return (
@@ -143,7 +143,7 @@ const Register = () => {
           <p className="mt-2 font-semibold">
             Already have an account?{' '}
             <Link to={'/login'} className="text-slate-700">
-              Login
+              <strong>Login</strong>
             </Link>
           </p>
           <div className="relative flex py-5 items-center">
