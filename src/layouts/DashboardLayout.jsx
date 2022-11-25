@@ -23,30 +23,36 @@ const DashboardLayout = () => {
               <Sidebar.ItemGroup>
                 {isSeller && (
                   <>
-                    <Sidebar.Item className="cursor-pointer font-extrabold">
-                      <Link to="/dashboard/add-a-product">Add A product</Link>
-                    </Sidebar.Item>
-                    <Sidebar.Item className="cursor-pointer font-extrabold">
-                      <Link to="/dashboard/my-products">My products</Link>
-                    </Sidebar.Item>
+                    <Link to="/dashboard/add-a-product">
+                      <Sidebar.Item className="cursor-pointer font-extrabold">
+                        Add A product
+                      </Sidebar.Item>
+                    </Link>
+                    <Link to="/dashboard/my-products">
+                      <Sidebar.Item className="cursor-pointer font-extrabold">
+                        My products
+                      </Sidebar.Item>
+                    </Link>
                   </>
                 )}
                 {isAdmin && (
                   <>
-                    <Sidebar.Item className="cursor-pointer font-extrabold">
-                      <Link to="/dashboard/all-sellers">All sellers</Link>
-                    </Sidebar.Item>
-                    <Sidebar.Item className="cursor-pointer font-extrabold">
-                      <Link to="/dashboard/all-buyers">All buyers</Link>
-                    </Sidebar.Item>
+                    <Link to="/dashboard/all-sellers">
+                      <Sidebar.Item className="cursor-pointer font-extrabold">
+                        All sellers
+                      </Sidebar.Item>
+                    </Link>
+                    <Link to="/dashboard/all-buyers">
+                      <Sidebar.Item className="cursor-pointer font-extrabold">
+                        All buyers
+                      </Sidebar.Item>
+                    </Link>
                   </>
                 )}
                 {isBuyer && (
-                  <>
-                    <Sidebar.Item className="cursor-pointer font-extrabold">
-                      <Link to="/dashboard/my-orders">My orders</Link>
-                    </Sidebar.Item>
-                  </>
+                  <Sidebar.Item className="cursor-pointer font-extrabold">
+                    <Link to="/dashboard/my-orders">My orders</Link>
+                  </Sidebar.Item>
                 )}
               </Sidebar.ItemGroup>
             </Sidebar.Items>
