@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import toyota from '../assets/category logos/toyota.png';
-import honda from '../assets/category logos/honda.png';
-import mitsubishi from '../assets/category logos/mitsubishi.png';
+import { Link } from 'react-router-dom';
 
 const CategoriesSection = () => {
   const [categories, setCategories] = useState([]);
@@ -21,18 +19,19 @@ const CategoriesSection = () => {
           Find you desire used car by categories
         </p>
         <div className="grid grid-cols-3 py-7 gap-10">
-          <div className="text-center hover:border hover:shadow hover:rounded-lg py-7">
-            <img className="mx-auto" src={toyota} width={100} alt="" />
-            <h4 className="font-semibold text-xl">Toyota</h4>
-          </div>
-          <div className="text-center hover:border hover:shadow hover:rounded-lg py-7">
-            <img className="mx-auto" src={honda} width={100} alt="" />
-            <h4 className="font-semibold text-xl">Honda</h4>
-          </div>
-          <div className="text-center hover:border hover:shadow hover:rounded-lg py-7">
-            <img className="mx-auto" src={mitsubishi} width={100} alt="" />
-            <h4 className="font-semibold text-xl">Mitsubishi</h4>
-          </div>
+          {categories.map(category => (
+            <Link
+              key={category._id}
+              to={`/cars/category/${category.category_name}`}
+            >
+              <div className="text-center hover:border hover:shadow hover:rounded-lg py-7">
+                <img className="mx-auto" src="" width={100} alt="" />
+                <h4 className="font-semibold text-xl">
+                  {category.category_name}
+                </h4>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

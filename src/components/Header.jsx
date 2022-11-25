@@ -12,13 +12,18 @@ const Header = () => {
           </Link>
           <Navbar.Toggle />
           <Navbar.Collapse>
-            <Link to="/" >
+            <Link className="font-bold" to="/">
               Home
             </Link>
-            <Link to="/">About</Link>
-            <Link to="/">Services</Link>
-            <Link to="/">Pricing</Link>
-            <Link to="/">Contact</Link>
+            <Link className="font-bold" to="/cars">
+              Cars
+            </Link>
+            <Link className="font-bold" to="/login">
+              Login
+            </Link>
+            <Link className="font-bold" to="/register">
+              Register
+            </Link>
           </Navbar.Collapse>
         </Navbar>
       </div>
