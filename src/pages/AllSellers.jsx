@@ -1,8 +1,14 @@
 import { Button, Table } from 'flowbite-react';
 import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const AllSellers = () => {
-  const { data: sellers = [], refetch } = useQuery({
+  const {
+    data: sellers = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ['sellers'],
     queryFn: async () => {
       const res = await fetch('http://localhost:5000/users/sellers');
@@ -11,6 +17,27 @@ const AllSellers = () => {
       return data;
     },
   });
+
+  const handleDeleteSeller = seller => {
+    fetch(`http://localhost:5000/user/${seller._id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `baerer ${localStorage.getItem('accessToken')}`,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data.deletedCount > 0) {
+          refetch();
+          toast.success('User deleted successfully');
+        }
+      });
+  };
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="p-4">
@@ -37,7 +64,12 @@ const AllSellers = () => {
                   </Table.Cell>
                   <Table.Cell>{seller.email}</Table.Cell>
                   <Table.Cell>
-                    <Button color="failure">Delete</Button>
+                    <Button
+                      color="failure"
+                      onClick={() => handleDeleteSeller(seller)}
+                    >
+                      Delete
+                    </Button>
                   </Table.Cell>
                 </Table.Row>
               ))}

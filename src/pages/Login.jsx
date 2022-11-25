@@ -7,30 +7,35 @@ import toast from 'react-hot-toast';
 import useToken from '../hooks/useToken';
 
 const Login = () => {
+  const { signIn, googleSignIn } = useContext(AuthContext);
+  const [loginUserEmail, setLoginUserEmail] = useState('');
+  const [token] = useToken(loginUserEmail);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
-
-  const { signIn, googleSignIn } = useContext(AuthContext);
-
-  const [loginUserEmail, setLoginUserEmail] = useState('');
-
-  const [token] = useToken(loginUserEmail);
 
   const location = useLocation();
   const navigate = useNavigate();
 
   const from = location.state?.from?.pathname || '/';
 
+  if (token) {
+    navigate(from, { replace: true });
+  }
+
   const handleLogin = data => {
-    console.log(data);
 
     signIn(data.email, data.password)
       .then(result => {
+        const user = result.user;
+
         setLoginUserEmail(data.email);
 
+        reset();
         toast.success('Login successful');
       })
       .catch(err => {
@@ -43,16 +48,15 @@ const Login = () => {
     googleSignIn()
       .then(result => {
         const user = result.user;
-        navigate(from, { replace: true });
+
         setLoginUserEmail(user.email);
+
+        navigate(from, { replace: true });
+
         toast.success('Login successful');
       })
       .catch(err => console.error(err));
   };
-
-  if (token) {
-    navigate(from, { replace: true });
-  }
 
   return (
     <div className="h-[90vh]">

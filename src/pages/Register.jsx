@@ -28,10 +28,11 @@ const Register = () => {
   }
 
   const handleRegister = data => {
+
     createUser(data.email, data.password)
       .then(result => {
         const user = result.user;
-        console.log(user);
+        
 
         updateUser(data.name)
           .then(() => {
