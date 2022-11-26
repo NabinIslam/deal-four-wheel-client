@@ -2,6 +2,8 @@ import { Button, Table } from 'flowbite-react';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { BsAlarm } from 'react-icons/bs';
+import verifiedTick from '../assets/verifiedTick.png';
 
 const AllSellers = () => {
   const {
@@ -13,7 +15,6 @@ const AllSellers = () => {
     queryFn: async () => {
       const res = await fetch('http://localhost:5000/users/sellers');
       const data = await res.json();
-
       return data;
     },
   });
@@ -34,6 +35,22 @@ const AllSellers = () => {
       });
   };
 
+  const handleVerifySeller = seller => {
+    fetch(`http://localhost:5000/user/${seller._id}`, {
+      method: 'PUT',
+      headers: {
+        authorization: `bearer ${localStorage.getItem('accessToken')}`,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount > 0) {
+          refetch();
+          toast.success('Seller verified successfully');
+        }
+      });
+  };
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -48,6 +65,7 @@ const AllSellers = () => {
               <Table.HeadCell>Sl No.</Table.HeadCell>
               <Table.HeadCell>Name</Table.HeadCell>
               <Table.HeadCell>Email</Table.HeadCell>
+              <Table.HeadCell>Varify</Table.HeadCell>
               <Table.HeadCell>Action</Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y">
@@ -59,9 +77,21 @@ const AllSellers = () => {
                   <Table.Cell>{i + 1}</Table.Cell>
 
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {seller.name}
+                    <p className="flex items-center">
+                      {seller.name}
+                      {seller.verified ? (
+                        <span className="ml-1">
+                          <img src={verifiedTick} alt="" />
+                        </span>
+                      ) : null}
+                    </p>
                   </Table.Cell>
                   <Table.Cell>{seller.email}</Table.Cell>
+                  <Table.Cell>
+                    <Button onClick={() => handleVerifySeller(seller)}>
+                      Verify
+                    </Button>
+                  </Table.Cell>
                   <Table.Cell>
                     <Button
                       color="failure"
