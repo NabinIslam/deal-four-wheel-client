@@ -29,7 +29,7 @@ const AllSellers = () => {
       .then(data => {
         if (data.deletedCount > 0) {
           refetch();
-          toast.success('User deleted successfully');
+          toast.success('Seller deleted successfully');
         }
       });
   };

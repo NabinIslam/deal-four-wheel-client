@@ -32,9 +32,11 @@ const Header = () => {
             <Link className="font-bold py-1 m-0" to="/cars">
               Cars
             </Link>
+            <Link className="font-bold py-1 m-0" to="/blogs">
+              Blogs
+            </Link>
             {user ? (
               <>
-                {' '}
                 <Link className="font-bold py-1" to="/dashboard">
                   Dashboard
                 </Link>
@@ -48,7 +50,6 @@ const Header = () => {
               </>
             ) : (
               <>
-                {' '}
                 <Link
                   className="font-bold bg-slate-800 text-white px-2 py-1 rounded-md"
                   to="/login"

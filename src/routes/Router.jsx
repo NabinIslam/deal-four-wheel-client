@@ -5,6 +5,7 @@ import Root from '../layouts/Root';
 import AddProduct from '../pages/AddProduct';
 import AllBuyers from '../pages/AllBuyers';
 import AllSellers from '../pages/AllSellers';
+import Blogs from '../pages/Blogs';
 import Cars from '../pages/Cars';
 import CategoryCars from '../pages/CategoryCars';
 import Dashboard from '../pages/Dashboard';
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register />,
+      },
+      {
+        path: '/blogs',
+        element: <Blogs />,
       },
       {
         path: '/dashboard',
