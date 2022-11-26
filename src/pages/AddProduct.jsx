@@ -8,19 +8,81 @@ import {
 } from 'flowbite-react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthProvider';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const AddProduct = () => {
+  const { loading } = useContext(AuthContext);
+
+  const categories = useLoaderData();
+
+  const imgHostKey = import.meta.env.VITE_APP_imgHostKey;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
+  const handleAddProduct = data => {
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append('image', image);
+    const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`;
+
+    fetch(url, {
+      method: 'POST',
+      body: formData,
+    })
+      .then(res => res.json())
+      .then(imgData => {
+        console.log(imgData);
+        if (imgData.success) {
+          const product = {
+            name: data.productName,
+            resalePrice: data.resalePrice,
+            originalPrice: data.originalPrice,
+            condition: data.condition,
+            category: data.category,
+            mobileNumber: data.mobileNumber,
+            location: data.location,
+            description: data.description,
+            yearOfPurchase: data.yearOfPurchase,
+            image: imgData.data.url,
+          };
+
+          fetch('http://localhost:5000/products', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+              authorization: `baerer ${localStorage.getItem('accessToken')}`,
+            },
+            body: JSON.stringify(product),
+          })
+            .then(res => res.json())
+            .then(result => {
+              toast.success(`Product added successfully`);
+              navigate('/dashboard/my-products');
+            });
+        }
+      });
+    console.log(data);
+  };
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className="p-4">
       <h3 className="text-xl font-semibold">Add A Product</h3>
       <form
-        onSubmit={handleSubmit()}
+        onSubmit={handleSubmit(handleAddProduct)}
         className="flex flex-col gap-4 my-5 max-w-md"
       >
         <div>
@@ -79,6 +141,24 @@ const AddProduct = () => {
           </Select>
           {errors.condition && (
             <p className="text-red-600">{errors.condition?.message}</p>
+          )}
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="category" value="Category" />
+          </div>
+          <Select
+            {...register('category', { required: 'Category is required' })}
+          >
+            <option value="">Select a category</option>
+            {categories.map(category => (
+              <option key={category._id} value={category.category_name}>
+                {category.category_name}
+              </option>
+            ))}
+          </Select>
+          {errors.category && (
+            <p className="text-red-600">{errors.category?.message}</p>
           )}
         </div>
         <div>
