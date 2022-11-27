@@ -15,7 +15,7 @@ import { AuthContext } from '../contexts/AuthProvider';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const AddProduct = () => {
-  const { loading } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
   const categories = useLoaderData();
 
@@ -25,6 +25,7 @@ const AddProduct = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const navigate = useNavigate();
@@ -41,7 +42,6 @@ const AddProduct = () => {
     })
       .then(res => res.json())
       .then(imgData => {
-        console.log(imgData);
         if (imgData.success) {
           const product = {
             name: data.productName,
@@ -54,6 +54,7 @@ const AddProduct = () => {
             description: data.description,
             yearOfPurchase: data.yearOfPurchase,
             image: imgData.data.url,
+            sellerEmail: user.email,
           };
 
           fetch('http://localhost:5000/products', {
@@ -66,12 +67,14 @@ const AddProduct = () => {
           })
             .then(res => res.json())
             .then(result => {
-              toast.success(`Product added successfully`);
-              navigate('/dashboard/my-products');
+              if (result.acknowledged) {
+                reset();
+                toast.success(`Product added successfully`);
+                navigate('/dashboard/my-products');
+              }
             });
         }
       });
-    console.log(data);
   };
 
   if (loading) {
