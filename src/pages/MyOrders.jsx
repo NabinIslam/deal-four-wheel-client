@@ -35,6 +35,7 @@ const MyOrders = () => {
             <Table.HeadCell>Phone</Table.HeadCell>
             <Table.HeadCell>Price</Table.HeadCell>
             <Table.HeadCell>Location</Table.HeadCell>
+            <Table.HeadCell>Pay</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
             {bookings.map((booking, i) => (
@@ -51,6 +52,9 @@ const MyOrders = () => {
                 <Table.Cell>{booking.phone}</Table.Cell>
                 <Table.Cell>{booking.price}</Table.Cell>
                 <Table.Cell>{booking.location}</Table.Cell>
+                <Table.Cell>
+                  <Button>Pay</Button>
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
