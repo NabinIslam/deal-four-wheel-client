@@ -50,9 +50,11 @@ const DashboardLayout = () => {
                   </>
                 )}
                 {isBuyer && (
-                  <Sidebar.Item className="cursor-pointer font-extrabold">
-                    <Link to="/dashboard/my-orders">My orders</Link>
-                  </Sidebar.Item>
+                  <Link to="/dashboard/my-orders">
+                    <Sidebar.Item className="cursor-pointer font-extrabold">
+                      My orders
+                    </Sidebar.Item>
+                  </Link>
                 )}
               </Sidebar.ItemGroup>
             </Sidebar.Items>

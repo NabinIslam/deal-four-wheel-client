@@ -40,6 +40,8 @@ const router = createBrowserRouter([
           },
           {
             path: '/cars/category/:name',
+            loader: ({ params }) =>
+              fetch(`http://localhost:5000/products/${params.name}`),
             element: (
               <PrivateRoute>
                 <CategoryCars />
