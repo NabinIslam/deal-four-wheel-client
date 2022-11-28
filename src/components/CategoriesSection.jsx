@@ -18,13 +18,13 @@ const CategoriesSection = () => {
         <p className="text-center font-normal text-lg m-0">
           Find you desire used car by categories
         </p>
-        <div className="grid grid-cols-3 py-7 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-7 gap-10 ">
           {categories.map(category => (
             <Link
               key={category._id}
               to={`/cars/category/${category.category_name}`}
             >
-              <div className="text-center hover:border hover:shadow hover:rounded-lg py-7">
+              <div className="text-center hover:border hover:shadow-2xl hover:rounded-lg py-7 border shadow rounded-lg">
                 <img className="mx-auto" src="" width={100} alt="" />
                 <h4 className="font-semibold text-xl">
                   {category.category_name}
