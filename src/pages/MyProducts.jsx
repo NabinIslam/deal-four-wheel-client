@@ -16,14 +16,13 @@ const MyProducts = () => {
     queryKey: ['currentUsersProducts'],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/user/products/${user.email}`
+        `https://dealfourwheel-server.vercel.app/user/products/${user.email}`
       );
       const data = await res.json();
 
       return data;
     },
   });
-
 
   if (isLoading) {
     return <LoadingSpinner />;

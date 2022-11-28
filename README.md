@@ -23,3 +23,8 @@ World's no. 1 used car buy sell website.
 ## Live site
 
 https://learn-hub-d6174.web.app/
+
+## Admin login access
+
+- admin@dealfourwheel.com
+- 123456

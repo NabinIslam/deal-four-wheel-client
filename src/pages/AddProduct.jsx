@@ -58,7 +58,7 @@ const AddProduct = () => {
             sellerName: user.displayName,
           };
 
-          fetch('http://localhost:5000/products', {
+          fetch('https://dealfourwheel-server.vercel.app/products', {
             method: 'POST',
             headers: {
               'content-type': 'application/json',

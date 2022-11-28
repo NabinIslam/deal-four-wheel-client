@@ -7,7 +7,7 @@ const CategoriesSection = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/categories')
+      .get('https://dealfourwheel-server.vercel.app/categories')
       .then(data => setCategories(data.data));
   }, []);
 

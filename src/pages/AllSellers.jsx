@@ -13,14 +13,16 @@ const AllSellers = () => {
   } = useQuery({
     queryKey: ['sellers'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/users/sellers');
+      const res = await fetch(
+        'https://dealfourwheel-server.vercel.app/users/sellers'
+      );
       const data = await res.json();
       return data;
     },
   });
 
   const handleDeleteSeller = seller => {
-    fetch(`http://localhost:5000/user/${seller._id}`, {
+    fetch(`https://dealfourwheel-server.vercel.app/user/${seller._id}`, {
       method: 'DELETE',
       headers: {
         authorization: `baerer ${localStorage.getItem('accessToken')}`,
@@ -36,7 +38,7 @@ const AllSellers = () => {
   };
 
   const handleVerifySeller = seller => {
-    fetch(`http://localhost:5000/user/${seller._id}`, {
+    fetch(`https://dealfourwheel-server.vercel.app/user/${seller._id}`, {
       method: 'PUT',
       headers: {
         authorization: `bearer ${localStorage.getItem('accessToken')}`,

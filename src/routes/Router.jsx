@@ -41,7 +41,9 @@ const router = createBrowserRouter([
           {
             path: '/cars/category/:name',
             loader: ({ params }) =>
-              fetch(`http://localhost:5000/products/${params.name}`),
+              fetch(
+                `https://dealfourwheel-server.vercel.app/products/${params.name}`
+              ),
             element: (
               <PrivateRoute>
                 <CategoryCars />
@@ -77,7 +79,8 @@ const router = createBrowserRouter([
                 <AddProduct />
               </SellerRoute>
             ),
-            loader: () => fetch('http://localhost:5000/categories'),
+            loader: () =>
+              fetch('https://dealfourwheel-server.vercel.app/categories'),
           },
           {
             path: '/dashboard/my-products',

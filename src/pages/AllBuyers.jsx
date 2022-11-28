@@ -11,7 +11,9 @@ const AllBuyers = () => {
   } = useQuery({
     queryKey: ['buyers'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/users/buyers');
+      const res = await fetch(
+        'https://dealfourwheel-server.vercel.app/users/buyers'
+      );
       const data = await res.json();
 
       return data;
@@ -19,7 +21,7 @@ const AllBuyers = () => {
   });
 
   const handleDeleteBuyer = buyer => {
-    fetch(`http://localhost:5000/user/${buyer._id}`, {
+    fetch(`https://dealfourwheel-server.vercel.app/user/${buyer._id}`, {
       method: 'DELETE',
       headers: {
         authorization: `baerer ${localStorage.getItem('accessToken')}`,
