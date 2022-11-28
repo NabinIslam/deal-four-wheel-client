@@ -55,6 +55,7 @@ const AddProduct = () => {
             yearOfPurchase: data.yearOfPurchase,
             image: imgData.data.url,
             sellerEmail: user.email,
+            sellerName: user.displayName,
           };
 
           fetch('http://localhost:5000/products', {
