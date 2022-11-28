@@ -6,7 +6,7 @@ import feature4 from '../assets/feature logos/4.png';
 const FeaturesSection = () => {
   return (
     <div className="py-7 bg=[#f5f5f5]">
-      <div className="container mx-auto flex items-center justify-between">
+      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <div>
           <img className="mx-auto" src={feature1} width={100} alt="" />
           <h3 className="text-center font-bold text-2xl">Latest Cars</h3>
