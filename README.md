@@ -26,5 +26,5 @@ https://dealfourwheel-c13a1.web.app/
 
 ## Admin login access
 
-- admin@dealfourwheel.com
-- 123456
+- adminEmail: admin@dealfourwheel.com
+- adminPassword: 123456
