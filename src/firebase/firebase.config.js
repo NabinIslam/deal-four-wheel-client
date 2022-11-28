@@ -11,13 +11,6 @@ const firebaseConfig = {
   storageBucket: import.meta.env.VITE_APP_storageBucket,
   messagingSenderId: import.meta.env.VITE_APP_messagingSenderId,
   appId: import.meta.env.VITE_APP_appId,
-
-  //   apiKey: 'AIzaSyDzd017C4puioCCwpDhgMYcErrPWJVTr5o',
-  //   authDomain: 'dealfourwheel-c13a1.firebaseapp.com',
-  //   projectId: 'dealfourwheel-c13a1',
-  //   storageBucket: 'dealfourwheel-c13a1.appspot.com',
-  //   messagingSenderId: '341115224567',
-  //   appId: '1:341115224567:web:6d6cd3016a5eaddbd56ef2',
 };
 
 // Initialize Firebase

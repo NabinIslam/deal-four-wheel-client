@@ -26,7 +26,7 @@ const CategoriesSection = () => {
             >
               <div className="text-center hover:border hover:shadow-2xl hover:rounded-lg py-7 border shadow rounded-lg">
                 <img className="mx-auto" src="" width={100} alt="" />
-                <h4 className="font-semibold text-xl">
+                <h4 className="font-extrabold text-xl">
                   {category.category_name}
                 </h4>
               </div>
